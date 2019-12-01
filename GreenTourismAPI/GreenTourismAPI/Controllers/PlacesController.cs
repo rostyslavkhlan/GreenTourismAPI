@@ -22,10 +22,10 @@ namespace GreenTourismAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<PlacePreviewResource>> GetAllAsync()
+        public async Task<IEnumerable<PreviewPlaceResource>> GetAllAsync()
         {
             var places = await _PlaceService.ListAsync();
-            return _Mapper.Map<IEnumerable<Place>, IEnumerable<PlacePreviewResource>>(places);
+            return _Mapper.Map<IEnumerable<Place>, IEnumerable<PreviewPlaceResource>>(places);
         }
 
         [HttpPost]

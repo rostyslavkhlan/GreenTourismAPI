@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using GreenTourismAPI.Domain.Models;
+using GreenTourismAPI.Resources.Hotels;
 using GreenTourismAPI.Resources.Places;
 
 namespace GreenTourismAPI.Mapping
@@ -9,7 +10,10 @@ namespace GreenTourismAPI.Mapping
         public ModelToResourceProfile()
         {
             CreateMap<Place, PlaceResource>();
-            CreateMap<Place, PlacePreviewResource>();
+            CreateMap<Place, PreviewPlaceResource>();
+
+            CreateMap<Hotel, HotelResource>();
+            CreateMap<Hotel, PreviewHotelResource>();
         }
     }
 }
