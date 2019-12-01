@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+
+using GreenTourismAPI.Domain.Repositories;
+using GreenTourismAPI.Domain.Services;
+using GreenTourismAPI.Persistence;
+using GreenTourismAPI.Persistence.Repositories;
+using GreenTourismAPI.Services;
 
 namespace GreenTourismAPI
 {
@@ -26,6 +27,16 @@ namespace GreenTourismAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddDbContext<AppDbContext>(options => {
+                options.UseInMemoryDatabase("green-tourism-api-in-memory");
+            });
+
+            services.AddScoped<IPlaceRepository, PlaceRepository>();
+            services.AddScoped<IPlaceService, PlaceService>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            services.AddAutoMapper(typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
