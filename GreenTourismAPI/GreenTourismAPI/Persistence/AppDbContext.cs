@@ -11,6 +11,7 @@ namespace GreenTourismAPI.Persistence
 
         public DbSet<Place> Places { get; set; }
         public DbSet<Hotel> Hotels { get; set; }
+        public DbSet<Facility> Facilities { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -60,6 +61,25 @@ namespace GreenTourismAPI.Persistence
                     ShortDescription = "Short Description",
                     Thumbnail = "Thumbnail",
                     PlaceId = 102
+                }
+            );
+
+            modelBuilder.Entity<Facility>().ToTable("Facilities");
+            modelBuilder.Entity<Facility>().HasKey(h => h.Id);
+            modelBuilder.Entity<Facility>().Property(h => h.Id).IsRequired().ValueGeneratedOnAdd();
+            modelBuilder.Entity<Facility>().Property(h => h.Name).IsRequired().HasMaxLength(50);
+
+            modelBuilder.Entity<Facility>().HasData
+            (
+                new Facility
+                {
+                    Id = 101,
+                    Name = "Name 1",
+                },
+                new Facility
+                {
+                    Id = 102,
+                    Name = "Name 2",
                 }
             );
         }

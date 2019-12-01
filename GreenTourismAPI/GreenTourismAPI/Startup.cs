@@ -34,9 +34,11 @@ namespace GreenTourismAPI
 
             services.AddScoped<IPlaceRepository, PlaceRepository>();
             services.AddScoped<IHotelRepository, HotelRepository>();
+            services.AddScoped<IFacilityRepository, FacilityRepository>();
 
             services.AddScoped<IPlaceService, PlaceService>();
             services.AddScoped<IHotelService, HotelService>();
+            services.AddScoped<IFacilityService, FacilityService>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
