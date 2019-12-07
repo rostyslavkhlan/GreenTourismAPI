@@ -1,5 +1,6 @@
 ﻿using GreenTourismAPI.Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace GreenTourismAPI.Persistence
 {
@@ -12,6 +13,7 @@ namespace GreenTourismAPI.Persistence
         public DbSet<Place> Places { get; set; }
         public DbSet<Hotel> Hotels { get; set; }
         public DbSet<Facility> Facilities { get; set; }
+        public DbSet<Room> Rooms { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -36,7 +38,8 @@ namespace GreenTourismAPI.Persistence
                     Id = 102,
                     Title = "Title 2",
                     ShortDescription = "Short Description",
-                    Thumbnail = "Thumbnail" }
+                    Thumbnail = "Thumbnail"
+                }
             );
 
             modelBuilder.Entity<Hotel>().ToTable("Hotels");
@@ -82,6 +85,45 @@ namespace GreenTourismAPI.Persistence
                     Name = "Name 2",
                 }
             );
+
+            modelBuilder.Entity<Room>().ToTable("Rooms");
+            modelBuilder.Entity<Room>().HasKey(r => r.Id);
+            modelBuilder.Entity<Room>().Property(r => r.Id).IsRequired().ValueGeneratedOnAdd();
+            modelBuilder.Entity<Room>().Property(r => r.Title).IsRequired().HasMaxLength(50);
+
+            modelBuilder.Entity<Room>().HasData
+            (
+                new Room
+                {
+                    Id = 101,
+                    Title = "Title 1",
+                    Description = "Description",
+                    PeopleCount = 4,
+                    Price = 500,
+                    Thumbnail = "Thumbnail",
+                    HotelId = 101,
+                },
+                new Room
+                {
+                    Id = 102,
+                    Title = "Title 2",
+                    Description = "Description",
+                    PeopleCount = 3,
+                    Price = 700,
+                    Thumbnail = "Thumbnail",
+                    HotelId = 102,
+                }
+            );
+
+            /*modelBuilder.Entity<RoomFacility>().HasKey(x => new { x.RoomId, x.FacilityId });
+            modelBuilder.Entity<RoomFacility>()
+                .HasOne(bc => bc.Room)
+                .WithMany(b => b.RoomFacilities)
+                .HasForeignKey(bc => bc.RoomId);
+            modelBuilder.Entity<RoomFacility>()
+                .HasOne(bc => bc.Facility)
+                .WithMany(c => c.RoomFacilities)
+                .HasForeignKey(bc => bc.FacilityId);*/
         }
     }
 }

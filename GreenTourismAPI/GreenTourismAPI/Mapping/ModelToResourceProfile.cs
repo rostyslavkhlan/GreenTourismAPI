@@ -3,6 +3,7 @@ using GreenTourismAPI.Domain.Models;
 using GreenTourismAPI.Resources.Facilities;
 using GreenTourismAPI.Resources.Hotels;
 using GreenTourismAPI.Resources.Places;
+using GreenTourismAPI.Resources.Rooms;
 
 namespace GreenTourismAPI.Mapping
 {
@@ -17,6 +18,8 @@ namespace GreenTourismAPI.Mapping
             CreateMap<Hotel, PreviewHotelResource>();
 
             CreateMap<Facility, FacilityResource>();
+
+            CreateMap<Room, RoomResource>();
         }
     }
 }
