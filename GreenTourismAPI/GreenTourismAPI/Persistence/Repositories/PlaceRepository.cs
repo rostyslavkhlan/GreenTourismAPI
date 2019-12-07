@@ -14,7 +14,7 @@ namespace GreenTourismAPI.Persistence.Repositories
 
         public async Task<IEnumerable<Place>> GetAllAsync()
         {
-            return await context.Places.Include(p => p.Images).ToListAsync();
+            return await context.Places.ToListAsync();
         }
 
         public async Task AddAsync(Place place)

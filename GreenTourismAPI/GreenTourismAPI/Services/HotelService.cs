@@ -21,9 +21,14 @@ namespace GreenTourismAPI.Services
             _UnitOfWork = unitOfWork;
         }
 
-        public async Task<IEnumerable<Hotel>> ListAsync()
+        public async Task<IEnumerable<Hotel>> GetAllAsync()
         {
-            return await _HotelRepository.ListAsync();
+            return await _HotelRepository.GetAllAsync();
+        }
+
+        public async Task<Hotel> GetByIdAsync(int id)
+        {
+            return await _HotelRepository.FindByIdAsync(id);
         }
 
         public async Task<HotelResponse> SaveAsync(Hotel hotel)

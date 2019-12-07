@@ -23,10 +23,24 @@ namespace GreenTourismAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<HotelResource>> GetAllAsync()
+        public async Task<IEnumerable<PreviewHotelResource>> GetAllAsync()
         {
-            var hotels = await _HotelService.ListAsync();
-            return _Mapper.Map<IEnumerable<Hotel>, IEnumerable<HotelResource>>(hotels);
+            var hotels = await _HotelService.GetAllAsync();
+            var result = _Mapper.Map<IEnumerable<Hotel>, IEnumerable<PreviewHotelResource>>(hotels).ToList();
+            result.ToList().ForEach(h => h.Thumbnail = Request.Host.ToString() + "/" + h.Thumbnail);
+
+            return result;
+        }
+
+        [HttpGet("{id}")]
+        public async Task<HotelResource> GetByIdAsync(int id)
+        {
+            var hotel = await _HotelService.GetByIdAsync(id);
+            var result = _Mapper.Map<Hotel, HotelResource>(hotel);
+            result.Images.ToList().ForEach(i => i.Name = Request.Host.ToString() + "/" + i.Name);
+            result.Thumbnail = Request.Host.ToString() + "/" + result.Thumbnail;
+
+            return result;
         }
 
         [HttpPost]

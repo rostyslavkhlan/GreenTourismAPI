@@ -54,7 +54,7 @@ namespace GreenTourismAPI.Persistence
                     Id = 101,
                     Title = "Title 1",
                     ShortDescription = "Short Description",
-                    Thumbnail = "Thumbnail",
+                    Thumbnail = "wqrds.jpg",
                     PlaceId = 101
                 },
                 new Hotel
@@ -148,15 +148,46 @@ namespace GreenTourismAPI.Persistence
                     PlaceId = 101
                 }
             );
-            /*modelBuilder.Entity<RoomFacility>().HasKey(x => new { x.RoomId, x.FacilityId });
-            modelBuilder.Entity<RoomFacility>()
-                .HasOne(bc => bc.Room)
-                .WithMany(b => b.RoomFacilities)
-                .HasForeignKey(bc => bc.RoomId);
-            modelBuilder.Entity<RoomFacility>()
-                .HasOne(bc => bc.Facility)
-                .WithMany(c => c.RoomFacilities)
-                .HasForeignKey(bc => bc.FacilityId);*/
+
+            modelBuilder.Entity<HotelImage>().ToTable("HotelsImages");
+            modelBuilder.Entity<HotelImage>().HasKey(i => i.Id);
+            modelBuilder.Entity<HotelImage>().Property(i => i.Id).IsRequired().ValueGeneratedOnAdd();
+            modelBuilder.Entity<HotelImage>().Property(i => i.Name).IsRequired();
+            modelBuilder.Entity<HotelImage>().Property(i => i.HotelId).IsRequired();
+
+            modelBuilder.Entity<HotelImage>().HasData
+            (
+                new HotelImage
+                {
+                    Id = 101,
+                    Name = "bgfn.jpg",
+                    HotelId = 101
+                },
+                new HotelImage
+                {
+                    Id = 102,
+                    Name = "nbfd.jpg",
+                    HotelId = 101
+                },
+                new HotelImage
+                {
+                    Id = 103,
+                    Name = "qwerdf.jpg",
+                    HotelId = 101
+                },
+                new HotelImage
+                {
+                    Id = 104,
+                    Name = "vxcd.jpg",
+                    HotelId = 101
+                },
+                new HotelImage
+                {
+                    Id = 105,
+                    Name = "wqrds.jpg",
+                    HotelId = 101
+                }
+            );
         }
     }
 }

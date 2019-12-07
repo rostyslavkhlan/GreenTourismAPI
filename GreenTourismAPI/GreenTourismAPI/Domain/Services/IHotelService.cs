@@ -7,7 +7,8 @@ namespace GreenTourismAPI.Domain.Services
 {
     public interface IHotelService
     {
-        Task<IEnumerable<Hotel>> ListAsync();
+        Task<IEnumerable<Hotel>> GetAllAsync();
+        Task<Hotel> GetByIdAsync(int id);
         Task<HotelResponse> SaveAsync(Hotel hotel);
         Task<HotelResponse> UpdateAsync(int id, Hotel hotel);
         Task<HotelResponse> DeleteAsync(int id);

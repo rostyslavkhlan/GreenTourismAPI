@@ -1,8 +1,5 @@
-﻿using GreenTourismAPI.Resources.Places;
-using System;
+﻿using GreenTourismAPI.Resources.Images;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace GreenTourismAPI.Resources.Hotels
 {
@@ -13,6 +10,6 @@ namespace GreenTourismAPI.Resources.Hotels
         public string Address { get; set; }
         public string ShortDescription { get; set; }
         public string Thumbnail { get; set; }
-        public PlaceResource Place { get; set; }
+        public IList<ImageResource> Images { get; set; }
     }
 }
