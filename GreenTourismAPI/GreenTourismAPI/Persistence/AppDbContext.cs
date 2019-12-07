@@ -31,7 +31,7 @@ namespace GreenTourismAPI.Persistence
                     Id = 101,
                     Title = "Title 1",
                     ShortDescription = "Short Description",
-                    Thumbnail = "Thumbnail"
+                    Thumbnail = "ccdefa.jpg"
                 },
                 new Place
                 {
@@ -115,6 +115,39 @@ namespace GreenTourismAPI.Persistence
                 }
             );
 
+            modelBuilder.Entity<PlaceImage>().ToTable("PlacesImages");
+            modelBuilder.Entity<PlaceImage>().HasKey(i => i.Id);
+            modelBuilder.Entity<PlaceImage>().Property(i => i.Id).IsRequired().ValueGeneratedOnAdd();
+            modelBuilder.Entity<PlaceImage>().Property(i => i.Name).IsRequired();
+            modelBuilder.Entity<PlaceImage>().Property(i => i.PlaceId).IsRequired();
+
+            modelBuilder.Entity<PlaceImage>().HasData
+            (
+                new PlaceImage
+                {
+                    Id = 101,
+                    Name = "ccdefa.jpg",
+                    PlaceId = 101
+                },
+                new PlaceImage
+                {
+                    Id = 102,
+                    Name = "cxcvcvgf.jpg",
+                    PlaceId = 101
+                },
+                new PlaceImage
+                {
+                    Id = 103,
+                    Name = "cxcxfe.jpg",
+                    PlaceId = 101
+                },
+                new PlaceImage
+                {
+                    Id = 104,
+                    Name = "zxcvba.jpg",
+                    PlaceId = 101
+                }
+            );
             /*modelBuilder.Entity<RoomFacility>().HasKey(x => new { x.RoomId, x.FacilityId });
             modelBuilder.Entity<RoomFacility>()
                 .HasOne(bc => bc.Room)

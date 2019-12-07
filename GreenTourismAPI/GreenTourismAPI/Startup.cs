@@ -59,6 +59,7 @@ namespace GreenTourismAPI
                 app.UseHsts();
             }
 
+            app.UseStaticFiles();
             app.UseHttpsRedirection();
             app.UseMvc();
         }

@@ -12,9 +12,9 @@ namespace GreenTourismAPI.Persistence.Repositories
         {
         }
 
-        public async Task<IEnumerable<Place>> ListAsync()
+        public async Task<IEnumerable<Place>> GetAllAsync()
         {
-            return await context.Places.ToListAsync();
+            return await context.Places.Include(p => p.Images).ToListAsync();
         }
 
         public async Task AddAsync(Place place)
@@ -24,7 +24,7 @@ namespace GreenTourismAPI.Persistence.Repositories
 
         public async Task<Place> FindByIdAsync(int id)
         {
-            return await context.Places.FindAsync(id);
+            return await context.Places.Include(p => p.Images).Include(p => p.Hotels).FirstOrDefaultAsync(p => p.Id == id);
         }
 
         public void Update(Place place)

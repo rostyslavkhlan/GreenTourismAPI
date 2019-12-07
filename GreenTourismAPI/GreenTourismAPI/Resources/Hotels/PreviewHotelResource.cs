@@ -13,6 +13,5 @@ namespace GreenTourismAPI.Resources.Hotels
         public string Address { get; set; }
         public string ShortDescription { get; set; }
         public string Thumbnail { get; set; }
-        public PlaceResource Place { get; set; }
     }
 }

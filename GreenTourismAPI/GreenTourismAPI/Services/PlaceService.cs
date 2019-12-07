@@ -19,9 +19,14 @@ namespace GreenTourismAPI.Services
             _UnitOfWork = unitOfWork;
         }
 
-        public async Task<IEnumerable<Place>> ListAsync()
+        public async Task<IEnumerable<Place>> GetAllAsync()
         {
-            return await _PlaceRepository.ListAsync();
+            return await _PlaceRepository.GetAllAsync();
+        }
+
+        public async Task<Place> GetByIdAsync(int id)
+        {
+            return await _PlaceRepository.FindByIdAsync(id);
         }
 
         public async Task<PlaceResponse> SaveAsync(Place place)

@@ -6,7 +6,7 @@ namespace GreenTourismAPI.Domain.Repositories
 {
     public interface IPlaceRepository
     {
-        Task<IEnumerable<Place>> ListAsync();
+        Task<IEnumerable<Place>> GetAllAsync();
         Task AddAsync(Place place);
         Task<Place> FindByIdAsync(int id);
         void Update(Place place);

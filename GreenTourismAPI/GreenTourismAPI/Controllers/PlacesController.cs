@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using GreenTourismAPI.Domain.Models;
@@ -24,8 +25,22 @@ namespace GreenTourismAPI.Controllers
         [HttpGet]
         public async Task<IEnumerable<PreviewPlaceResource>> GetAllAsync()
         {
-            var places = await _PlaceService.ListAsync();
-            return _Mapper.Map<IEnumerable<Place>, IEnumerable<PreviewPlaceResource>>(places);
+            var places = await _PlaceService.GetAllAsync();
+            var result = _Mapper.Map<IEnumerable<Place>, IEnumerable<PreviewPlaceResource>>(places).ToList();
+            result.ToList().ForEach(p => p.Thumbnail = Request.Host.ToString() + "/" + p.Thumbnail);
+
+            return result;
+        }
+
+        [HttpGet("{id}")]
+        public async Task<PlaceResource> GetByIdAsync(int id)
+        {
+            var place = await _PlaceService.GetByIdAsync(id);
+            var result = _Mapper.Map<Place, PlaceResource>(place);
+            result.Images.ToList().ForEach(i => i.Name = Request.Host.ToString() + "/" + i.Name);
+            result.Thumbnail = Request.Host.ToString() + "/" + result.Thumbnail;
+
+            return result;
         }
 
         [HttpPost]

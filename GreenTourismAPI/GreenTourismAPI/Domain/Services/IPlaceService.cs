@@ -7,7 +7,8 @@ namespace GreenTourismAPI.Domain.Services
 {
     public interface IPlaceService
     {
-        Task<IEnumerable<Place>> ListAsync();
+        Task<IEnumerable<Place>> GetAllAsync();
+        Task<Place> GetByIdAsync(int id);
         Task<PlaceResponse> SaveAsync(Place place);
         Task<PlaceResponse> UpdateAsync(int id, Place place);
         Task<PlaceResponse> DeleteAsync(int id);
