@@ -12,7 +12,7 @@ namespace GreenTourismAPI.Resources.Rooms
         public string Description { get; set; }
         public string Thumbnail { get; set; }
 
-        public Hotel Hotel { get; set; }
+        //public Hotel Hotel { get; set; }
         //public IList<Facility> Facilities { get; set; }
     }
 }

@@ -12,12 +12,12 @@ using Microsoft.AspNetCore.Mvc;
 namespace GreenTourismAPI.Controllers
 {
     [Route("api/[controller]")]
-    public class RoomController : Controller
+    public class RoomsController : Controller
     {
         private readonly IRoomService _RoomService;
         private readonly IMapper _Mapper;
 
-        public RoomController(IRoomService roomService, IMapper mapper)
+        public RoomsController(IRoomService roomService, IMapper mapper)
         {
             _RoomService = roomService;
             _Mapper = mapper;

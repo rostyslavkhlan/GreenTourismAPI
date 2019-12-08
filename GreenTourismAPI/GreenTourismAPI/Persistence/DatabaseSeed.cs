@@ -46,8 +46,20 @@ namespace GreenTourismAPI.Persistence
             {
                 var users = new List<User>
                 {
-                    new User { Email = "admin@admin.com", Password = passwordHasher.HashPassword("12345678") },
-                    new User { Email = "common@common.com", Password = passwordHasher.HashPassword("12345678") }
+                    new User
+                    {
+                        FirstName = "Admin",
+                        LastName = "Admin",
+                        Email = "admin@admin.com",
+                        Password = passwordHasher.HashPassword("12345678")
+                    },
+                    new User
+                    {
+                        FirstName = "Common",
+                        LastName = "User",
+                        Email = "common@common.com",
+                        Password = passwordHasher.HashPassword("12345678")
+                    }
                 };
 
                 users[0].UserRoles.Add(new UserRole
@@ -102,7 +114,9 @@ namespace GreenTourismAPI.Persistence
                     {
                         Id = 101,
                         Title = "Title 1",
-                        ShortDescription = "Short Description",
+                        Address = "Address 1",
+                        ShortDescription = "Short Description 1",
+                        LongDescription = "Long Description 1",
                         Thumbnail = "wqrds.jpg",
                         PlaceId = 101
                     },
@@ -110,8 +124,10 @@ namespace GreenTourismAPI.Persistence
                     {
                         Id = 102,
                         Title = "Title 2",
-                        ShortDescription = "Short Description",
-                        Thumbnail = "Thumbnail",
+                        Address = "Address 2",
+                        ShortDescription = "Short Description 2",
+                        LongDescription = "Long Description 2",
+                        Thumbnail = "153005888.jpg",
                         PlaceId = 102
                     }
                 };
@@ -249,7 +265,31 @@ namespace GreenTourismAPI.Persistence
                         Id = 105,
                         Name = "wqrds.jpg",
                         HotelId = 101
-                    }
+                    },
+                    new HotelImage
+                    {
+                        Id = 106,
+                        Name = "148615986.jpg",
+                        HotelId = 102
+                    },
+                    new HotelImage
+                    {
+                        Id = 107,
+                        Name = "150066534.jpg",
+                        HotelId = 102
+                    },
+                    new HotelImage
+                    {
+                        Id = 108,
+                        Name = "150066552.jpg",
+                        HotelId = 102
+                    },
+                    new HotelImage
+                    {
+                        Id = 109,
+                        Name = "153005888.jpg",
+                        HotelId = 102
+                    },
                 };
 
                 context.HotelsImages.AddRange(hotelsImages);
