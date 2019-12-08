@@ -4,6 +4,7 @@ using GreenTourismAPI.Resources.Facilities;
 using GreenTourismAPI.Resources.Hotels;
 using GreenTourismAPI.Resources.Places;
 using GreenTourismAPI.Resources.Rooms;
+using GreenTourismAPI.Resources.Users;
 
 namespace GreenTourismAPI.Mapping
 {
@@ -15,6 +16,7 @@ namespace GreenTourismAPI.Mapping
             CreateMap<SaveHotelResource, Hotel>();
             CreateMap<SaveFacilityResource, Facility>();
             CreateMap<SaveRoomResource, Room>();
+            CreateMap<UserCredentialsResource, User>();
         }
     }
 }

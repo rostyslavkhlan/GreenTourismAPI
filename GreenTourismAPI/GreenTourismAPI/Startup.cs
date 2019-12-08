@@ -11,6 +11,13 @@ using GreenTourismAPI.Domain.Services;
 using GreenTourismAPI.Persistence;
 using GreenTourismAPI.Persistence.Repositories;
 using GreenTourismAPI.Services;
+using GreenTourismAPI.Security.Tokens;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System;
+using GreenTourismAPI.Domain.Security.Tokens;
+using GreenTourismAPI.Domain.Security.Hashing;
+using GreenTourismAPI.Security.Hashing;
 
 namespace GreenTourismAPI
 {
@@ -32,17 +39,44 @@ namespace GreenTourismAPI
                 options.UseInMemoryDatabase("green-tourism-api-in-memory");
             });
 
+            services.AddSingleton<IPasswordHasher, PasswordHasher>();
+            services.AddSingleton<ITokenHandler, TokenHandler>();
+
             services.AddScoped<IPlaceRepository, PlaceRepository>();
             services.AddScoped<IHotelRepository, HotelRepository>();
             services.AddScoped<IFacilityRepository, FacilityRepository>();
             services.AddScoped<IRoomRepository, RoomRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddScoped<IPlaceService, PlaceService>();
             services.AddScoped<IHotelService, HotelService>();
             services.AddScoped<IFacilityService, FacilityService>();
             services.AddScoped<IRoomService, RoomService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            services.Configure<TokenOptions>(Configuration.GetSection("TokenOptions"));
+            var tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
+
+            var signingConfigurations = new SigningConfigurations();
+            services.AddSingleton(signingConfigurations);
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(jwtBearerOptions =>
+                {
+                    jwtBearerOptions.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = tokenOptions.Issuer,
+                        ValidAudience = tokenOptions.Audience,
+                        IssuerSigningKey = signingConfigurations.Key,
+                        ClockSkew = TimeSpan.Zero
+                    };
+                });
 
             services.AddAutoMapper(typeof(Startup));
         }
@@ -61,6 +95,7 @@ namespace GreenTourismAPI
 
             app.UseStaticFiles();
             app.UseHttpsRedirection();
+            app.UseAuthentication();
             app.UseMvc();
         }
     }

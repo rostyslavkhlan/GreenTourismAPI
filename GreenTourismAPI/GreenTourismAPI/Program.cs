@@ -1,4 +1,5 @@
-﻿using GreenTourismAPI.Persistence;
+﻿using GreenTourismAPI.Domain.Security.Hashing;
+using GreenTourismAPI.Persistence;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,9 +13,11 @@ namespace GreenTourismAPI
             var host = BuildWebHost(args);
 
             using (var scope = host.Services.CreateScope())
-            using (var context = scope.ServiceProvider.GetService<AppDbContext>())
             {
-                context.Database.EnsureCreated();
+                var services = scope.ServiceProvider;
+                var context = services.GetService<AppDbContext>();
+                var passwordHasher = services.GetService<IPasswordHasher>();
+                DatabaseSeed.Seed(context, passwordHasher);
             }
 
             host.Run();
