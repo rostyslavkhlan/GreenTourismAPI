@@ -17,6 +17,7 @@ namespace GreenTourismAPI.Mapping
             CreateMap<SaveFacilityResource, Facility>();
             CreateMap<SaveRoomResource, Room>();
             CreateMap<UserCredentialsResource, User>();
+            CreateMap<UserRegisterResource, User>();
         }
     }
 }

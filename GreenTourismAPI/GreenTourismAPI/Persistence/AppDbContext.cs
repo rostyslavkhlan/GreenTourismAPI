@@ -20,6 +20,9 @@ namespace GreenTourismAPI.Persistence
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
 
+        public DbSet<PlaceImage> PlacesImages { get; set; }
+        public DbSet<HotelImage> HotelsImages { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -54,24 +57,6 @@ namespace GreenTourismAPI.Persistence
             modelBuilder.Entity<Place>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
             modelBuilder.Entity<Place>().Property(p => p.Title).IsRequired().HasMaxLength(50);
 
-            modelBuilder.Entity<Place>().HasData
-            (
-                new Place
-                {
-                    Id = 101,
-                    Title = "Title 1",
-                    ShortDescription = "Short Description",
-                    Thumbnail = "ccdefa.jpg"
-                },
-                new Place
-                {
-                    Id = 102,
-                    Title = "Title 2",
-                    ShortDescription = "Short Description",
-                    Thumbnail = "Thumbnail"
-                }
-            );
-
             #endregion
 
             #region Hotels
@@ -80,26 +65,6 @@ namespace GreenTourismAPI.Persistence
             modelBuilder.Entity<Hotel>().HasKey(h => h.Id);
             modelBuilder.Entity<Hotel>().Property(h => h.Id).IsRequired().ValueGeneratedOnAdd();
             modelBuilder.Entity<Hotel>().Property(h => h.Title).IsRequired().HasMaxLength(50);
-
-            modelBuilder.Entity<Hotel>().HasData
-            (
-                new Hotel
-                {
-                    Id = 101,
-                    Title = "Title 1",
-                    ShortDescription = "Short Description",
-                    Thumbnail = "wqrds.jpg",
-                    PlaceId = 101
-                },
-                new Hotel
-                {
-                    Id = 102,
-                    Title = "Title 2",
-                    ShortDescription = "Short Description",
-                    Thumbnail = "Thumbnail",
-                    PlaceId = 102
-                }
-            );
 
             #endregion
 
@@ -110,20 +75,6 @@ namespace GreenTourismAPI.Persistence
             modelBuilder.Entity<Facility>().Property(h => h.Id).IsRequired().ValueGeneratedOnAdd();
             modelBuilder.Entity<Facility>().Property(h => h.Name).IsRequired().HasMaxLength(50);
 
-            modelBuilder.Entity<Facility>().HasData
-            (
-                new Facility
-                {
-                    Id = 101,
-                    Name = "Name 1",
-                },
-                new Facility
-                {
-                    Id = 102,
-                    Name = "Name 2",
-                }
-            );
-
             #endregion
 
             #region Rooms
@@ -132,30 +83,6 @@ namespace GreenTourismAPI.Persistence
             modelBuilder.Entity<Room>().HasKey(r => r.Id);
             modelBuilder.Entity<Room>().Property(r => r.Id).IsRequired().ValueGeneratedOnAdd();
             modelBuilder.Entity<Room>().Property(r => r.Title).IsRequired().HasMaxLength(50);
-
-            modelBuilder.Entity<Room>().HasData
-            (
-                new Room
-                {
-                    Id = 101,
-                    Title = "Title 1",
-                    Description = "Description",
-                    PeopleCount = 4,
-                    Price = 500,
-                    Thumbnail = "Thumbnail",
-                    HotelId = 101,
-                },
-                new Room
-                {
-                    Id = 102,
-                    Title = "Title 2",
-                    Description = "Description",
-                    PeopleCount = 3,
-                    Price = 700,
-                    Thumbnail = "Thumbnail",
-                    HotelId = 102,
-                }
-            );
 
             #endregion
 
@@ -167,34 +94,6 @@ namespace GreenTourismAPI.Persistence
             modelBuilder.Entity<PlaceImage>().Property(i => i.Name).IsRequired();
             modelBuilder.Entity<PlaceImage>().Property(i => i.PlaceId).IsRequired();
 
-            modelBuilder.Entity<PlaceImage>().HasData
-            (
-                new PlaceImage
-                {
-                    Id = 101,
-                    Name = "ccdefa.jpg",
-                    PlaceId = 101
-                },
-                new PlaceImage
-                {
-                    Id = 102,
-                    Name = "cxcvcvgf.jpg",
-                    PlaceId = 101
-                },
-                new PlaceImage
-                {
-                    Id = 103,
-                    Name = "cxcxfe.jpg",
-                    PlaceId = 101
-                },
-                new PlaceImage
-                {
-                    Id = 104,
-                    Name = "zxcvba.jpg",
-                    PlaceId = 101
-                }
-            );
-
             #endregion
 
             #region HotelsImages
@@ -204,40 +103,6 @@ namespace GreenTourismAPI.Persistence
             modelBuilder.Entity<HotelImage>().Property(i => i.Id).IsRequired().ValueGeneratedOnAdd();
             modelBuilder.Entity<HotelImage>().Property(i => i.Name).IsRequired();
             modelBuilder.Entity<HotelImage>().Property(i => i.HotelId).IsRequired();
-
-            modelBuilder.Entity<HotelImage>().HasData
-            (
-                new HotelImage
-                {
-                    Id = 101,
-                    Name = "bgfn.jpg",
-                    HotelId = 101
-                },
-                new HotelImage
-                {
-                    Id = 102,
-                    Name = "nbfd.jpg",
-                    HotelId = 101
-                },
-                new HotelImage
-                {
-                    Id = 103,
-                    Name = "qwerdf.jpg",
-                    HotelId = 101
-                },
-                new HotelImage
-                {
-                    Id = 104,
-                    Name = "vxcd.jpg",
-                    HotelId = 101
-                },
-                new HotelImage
-                {
-                    Id = 105,
-                    Name = "wqrds.jpg",
-                    HotelId = 101
-                }
-            );
 
             #endregion
         }
