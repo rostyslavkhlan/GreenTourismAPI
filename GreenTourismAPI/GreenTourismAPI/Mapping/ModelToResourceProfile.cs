@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using GreenTourismAPI.Domain.Models;
 using GreenTourismAPI.Domain.Security.Tokens;
+using GreenTourismAPI.Domain.Services.Communication.Responses;
+using GreenTourismAPI.Resources;
 using GreenTourismAPI.Resources.Facilities;
 using GreenTourismAPI.Resources.Hotels;
 using GreenTourismAPI.Resources.Images;
@@ -41,6 +43,11 @@ namespace GreenTourismAPI.Mapping
                 .ForMember(a => a.AccessToken, opt => opt.MapFrom(a => a.Token))
                 .ForMember(a => a.RefreshToken, opt => opt.MapFrom(a => a.RefreshToken.Token))
                 .ForMember(a => a.Expiration, opt => opt.MapFrom(a => a.Expiration));
+
+            CreateMap<UserLoginResponse, LoginResource>()
+                .ForMember(a => a.AccessToken, opt => opt.MapFrom(a => a.Token.Token))
+                .ForMember(a => a.RefreshToken, opt => opt.MapFrom(a => a.Token.RefreshToken.Token))
+                .ForMember(a => a.Expiration, opt => opt.MapFrom(a => a.Token.Expiration));
         }
     }
 }

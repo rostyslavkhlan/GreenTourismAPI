@@ -19,18 +19,18 @@ namespace GreenTourismAPI.Services
             _TokenHandler = tokenHandler;
         }
 
-        public async Task<TokenResponse> CreateAccessTokenAsync(string email, string password)
+        public async Task<UserLoginResponse> CreateAccessTokenAsync(string email, string password)
         {
             var user = await _userService.FindByEmailAsync(email);
 
             if (user == null || !_PasswordHasher.PasswordMatches(password, user.Password))
             {
-                return new TokenResponse("Invalid credentials.");
+                return new UserLoginResponse(false, "Invalid credentials.", null, null);
             }
 
             var token = _TokenHandler.CreateAccessToken(user);
 
-            return new TokenResponse(token);
+            return new UserLoginResponse(true, string.Empty, token, user);
         }
 
         public async Task<TokenResponse> RefreshTokenAsync(string refreshToken, string userEmail)

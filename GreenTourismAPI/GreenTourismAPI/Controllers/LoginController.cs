@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using GreenTourismAPI.Domain.Security.Tokens;
 using GreenTourismAPI.Domain.Services;
+using GreenTourismAPI.Domain.Services.Communication.Responses;
+using GreenTourismAPI.Resources;
 using GreenTourismAPI.Resources.Users;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -33,8 +35,8 @@ namespace GreenTourismAPI.Controllers
                 return BadRequest(response.Message);
             }
 
-            var accessTokenResource = _mapper.Map<AccessToken, AccessTokenResource>(response.Token);
-            return Ok(accessTokenResource);
+            var loginResource = _mapper.Map<UserLoginResponse, LoginResource>(response);
+            return Ok(loginResource);
         }
 
         [Route("/api/token/refresh")]

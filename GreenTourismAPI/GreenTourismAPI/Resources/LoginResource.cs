@@ -1,6 +1,8 @@
-﻿namespace GreenTourismAPI.Resources.Users
+﻿using GreenTourismAPI.Resources.Users;
+
+namespace GreenTourismAPI.Resources
 {
-    public class AccessTokenResource
+    public class LoginResource
     {
         public string AccessToken { get; set; }
         public string RefreshToken { get; set; }
