@@ -23,6 +23,5 @@ namespace GreenTourismAPI.Resources.Rooms
 
         [Required]
         public string HotelId { get; set; }
-        //public IList<string> FacilitiesIds { get; set; }
     }
 }

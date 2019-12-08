@@ -14,7 +14,7 @@ namespace GreenTourismAPI.Persistence.Repositories
 
         public async Task<IEnumerable<Hotel>> GetAllAsync()
         {
-            return await context.Hotels.Include(h => h.Place).ToListAsync();
+            return await context.Hotels.Include(h => h.Place).Include(h => h.Rooms).ToListAsync();
         }
 
         public async Task AddAsync(Hotel hotel)

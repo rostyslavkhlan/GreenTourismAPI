@@ -1,5 +1,8 @@
-﻿namespace GreenTourismAPI.Domain.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace GreenTourismAPI.Domain.Models
 {
+    [Table("RoomFacilities")]
     public class RoomFacility
     {
         public int RoomId { get; set; }

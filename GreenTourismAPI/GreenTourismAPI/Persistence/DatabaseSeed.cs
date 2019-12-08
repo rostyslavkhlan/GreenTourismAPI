@@ -14,8 +14,9 @@ namespace GreenTourismAPI.Persistence
 
             SeedPlaces(context);
             SeedHotels(context);
-            SeedRooms(context);
+
             SeedFacilities(context);
+            SeedRooms(context);
 
             SeedRoles(context);
             SeedUsers(context, passwordHasher);
@@ -143,16 +144,10 @@ namespace GreenTourismAPI.Persistence
             {
                 var facilities = new List<Facility>
                 {
-                    new Facility
-                    {
-                        Id = 101,
-                        Name = "Name 1",
-                    },
-                    new Facility
-                    {
-                        Id = 102,
-                        Name = "Name 2",
-                    }
+                    new Facility { Name = "TV" },
+                    new Facility { Name = "Free WiFi" },
+                    new Facility { Name = "Private bathroom" },
+                    new Facility { Name = "Sofa" }
                 };
 
                 context.Facilities.AddRange(facilities);
@@ -187,6 +182,32 @@ namespace GreenTourismAPI.Persistence
                         HotelId = 102,
                     }
                 };
+
+                rooms[0].RoomFacilities.Add( new RoomFacility
+                {
+                    FacilityId = context.Facilities.FirstOrDefault(f => f.Name.Equals("TV")).Id
+                });
+                rooms[0].RoomFacilities.Add(new RoomFacility
+                {
+                    FacilityId = context.Facilities.FirstOrDefault(f => f.Name.Equals("Free WiFi")).Id
+                });
+                rooms[0].RoomFacilities.Add(new RoomFacility
+                {
+                    FacilityId = context.Facilities.FirstOrDefault(f => f.Name.Equals("Private bathroom")).Id
+                });
+
+                rooms[1].RoomFacilities.Add(new RoomFacility
+                {
+                    FacilityId = context.Facilities.FirstOrDefault(f => f.Name.Equals("TV")).Id
+                });
+                rooms[1].RoomFacilities.Add(new RoomFacility
+                {
+                    FacilityId = context.Facilities.FirstOrDefault(f => f.Name.Equals("Private bathroom")).Id
+                });
+                rooms[1].RoomFacilities.Add(new RoomFacility
+                {
+                    FacilityId = context.Facilities.FirstOrDefault(f => f.Name.Equals("Sofa")).Id
+                });
 
                 context.Rooms.AddRange(rooms);
                 context.SaveChanges();

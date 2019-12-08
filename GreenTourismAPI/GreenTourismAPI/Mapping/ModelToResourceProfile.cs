@@ -29,7 +29,8 @@ namespace GreenTourismAPI.Mapping
 
             CreateMap<Facility, FacilityResource>();
 
-            CreateMap<Room, RoomResource>();
+            CreateMap<Room, RoomResource>()
+                .ForMember(r => r.Facilities, opt => opt.MapFrom(i => i.RoomFacilities.Select(rf => rf.Facility.Name)));
 
             CreateMap<PlaceImage, ImageResource>()
                 .ForMember(nameof(BaseImage.Name), opt => opt.MapFrom(i => "Images/Places/" + i.PlaceId.ToString() + "/" + i.Name));

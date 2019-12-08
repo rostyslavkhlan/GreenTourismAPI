@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace GreenTourismAPI.Domain.Models
 {
@@ -7,6 +8,7 @@ namespace GreenTourismAPI.Domain.Models
         public int Id { get; set; }
         public string Name { get; set; }
 
-        //public IList<RoomFacility> RoomFacilities { get; set; }
+        public ICollection<RoomFacility> RoomsFacility { get; set; } = new Collection<RoomFacility>();
+
     }
 }

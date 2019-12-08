@@ -2,6 +2,7 @@
 using GreenTourismAPI.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace GreenTourismAPI.Persistence.Repositories
@@ -14,7 +15,10 @@ namespace GreenTourismAPI.Persistence.Repositories
 
         public async Task<IEnumerable<Room>> ListAsync()
         {
-            return await context.Rooms.ToListAsync();
+            return await context.Rooms
+                .Include(r => r.RoomFacilities)
+                .ThenInclude(ur => ur.Facility)
+                .ToListAsync();
         }
 
         public async Task AddAsync(Room room)

@@ -28,6 +28,7 @@ namespace GreenTourismAPI.Persistence
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<UserRole>().HasKey(ur => new { ur.UserId, ur.RoleId });
+            modelBuilder.Entity<RoomFacility>().HasKey(ur => new { ur.RoomId, ur.FacilityId });
 
             #region Roles
 

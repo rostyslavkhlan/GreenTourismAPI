@@ -11,6 +11,7 @@ namespace GreenTourismAPI.Domain.Models
         public string LongDescription { get; set; }
         public string Thumbnail { get; set; }
         public IList<HotelImage> Images { get; set; } = new List<HotelImage>();
+        public IList<Room> Rooms { get; set; } = new List<Room>();
 
         public int PlaceId { get; set; }
         public Place Place { get; set; }

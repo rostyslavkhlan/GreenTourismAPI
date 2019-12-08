@@ -1,4 +1,5 @@
 ﻿using GreenTourismAPI.Resources.Images;
+using GreenTourismAPI.Resources.Rooms;
 using System.Collections.Generic;
 
 namespace GreenTourismAPI.Resources.Hotels
@@ -11,5 +12,6 @@ namespace GreenTourismAPI.Resources.Hotels
         public string ShortDescription { get; set; }
         public string Thumbnail { get; set; }
         public IList<ImageResource> Images { get; set; }
+        //public IList<RoomResource> Rooms { get; set; }
     }
 }
